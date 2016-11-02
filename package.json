@@ -1,0 +1,32 @@
+{
+  "name": "Meeeal",
+  "description": "Meeeal Client Application",
+  "author": "T.Tsutsumi",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "react": "15.3.2",
+    "react-native": "0.36.0",
+    "react-native-router-flux": "^3.36.0",
+    "react-redux": "^4.4.5",
+    "realm": "^0.14.3",
+    "redux": "^3.6.0",
+    "redux-actions": "^0.13.0"
+  },
+  "jest": {
+    "preset": "jest-react-native"
+  },
+  "devDependencies": {
+    "babel-jest": "16.0.0",
+    "babel-preset-react-native": "1.9.0",
+    "eslint-config-rallycoding": "^3.1.0",
+    "jest": "16.0.2",
+    "jest-react-native": "16.0.0",
+    "react-test-renderer": "15.3.2"
+  }
+}
