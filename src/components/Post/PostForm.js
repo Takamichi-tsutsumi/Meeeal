@@ -13,15 +13,12 @@ import {
 class PostForm extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
 
     this.onFoodChange = this.onFoodChange.bind(this);
   }
   
   onFoodChange(text) {
     this.props.foodTextChanged(text);
-    console.log(text);
-    console.log(this.props);
   }
 
   render() {

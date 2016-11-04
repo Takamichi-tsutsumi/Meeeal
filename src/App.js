@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import { Router, Scene } from 'react-native-router-flux';
+import devToolsEnhancer from 'remote-redux-devtools';
 import reducers from './reducers';
 import Home from './components/Home';
 import Post from './components/Post';
 import Calendar from './components/Calendar';
 import { TabIcon } from './components/common';
 
-const RouterWithRedux = connect()(Router);
-const store = createStore(reducers);
 
+let store;
+
+if (__DEV__) {
+  store = createStore(reducers, devToolsEnhancer());
+} else {
+  store = createStore(reducers);
+}
+const RouterWithRedux = connect()(Router);
 
 class App extends Component {
   render() {
