@@ -1,7 +1,7 @@
 export const EatOut = 0;
 export const HomeMade = 1;
 
-class Meal {};
+export class Meal {}
 Meal.schema = {
   name: 'Meal',
   primaryKey: 'id',
@@ -16,6 +16,3 @@ Meal.schema = {
     place: 'string'
   }
 };
-
-export Meal;
-

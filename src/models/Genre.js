@@ -1,4 +1,4 @@
-class Genre {};
+export class Genre {}
 Genre.schema = {
   name: 'Genre',
   primaryKey: 'id',
@@ -7,6 +7,3 @@ Genre.schema = {
     name: 'string'
   }
 };
-
-export Genre;
-

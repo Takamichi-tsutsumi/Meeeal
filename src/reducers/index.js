@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
+import { PostFormReducer as postForm } from './PostFormReducer';
 
 export default combineReducers({
-  banana: () => []
+  postForm
 });
