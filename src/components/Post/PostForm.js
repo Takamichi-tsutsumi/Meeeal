@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { foodTextChanged } from '../../actions/PostFormActions';
+import db from '../../models';
+import { foodTextChanged, postCreated } from '../../actions/PostFormActions';
 import {
   Input,
   Button,
@@ -15,10 +15,35 @@ class PostForm extends Component {
     super(props);
 
     this.onFoodChange = this.onFoodChange.bind(this);
+    this.onButtonDown = this.onButtonDown.bind(this);
   }
   
   onFoodChange(text) {
     this.props.foodTextChanged(text);
+  }
+
+  onButtonDown() {
+    this.createPost(this.props.postFormData);
+    this.props.postCreated();
+  }
+
+  createPost(formData) {
+    console.log('Saving object', formData);
+    const data = Object.assign(formData);
+
+    db.write(() => {
+      const m = db.objects('Meal').sorted('id', true).slice(0, 1);
+      let id;
+      if (m.length === 0) {
+        id = 1;
+      } else {
+        id = m[0].id + 1;
+      }
+
+      data.id = id;
+
+      db.create('Meal', data);
+    });
   }
 
   render() {
@@ -33,7 +58,7 @@ class PostForm extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>
+          <Button onPress={this.onButtonDown}>
             Post
           </Button>
         </CardSection>
@@ -44,13 +69,14 @@ class PostForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    postForm: state.postForm
+    postFormData: state.postFormData
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    foodTextChanged: bindActionCreators(foodTextChanged, dispatch)
+    foodTextChanged: bindActionCreators(foodTextChanged, dispatch),
+    postCreated: bindActionCreators(postCreated, dispatch)
   };
 };
 

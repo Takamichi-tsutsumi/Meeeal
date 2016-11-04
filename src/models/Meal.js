@@ -7,12 +7,13 @@ Meal.schema = {
   primaryKey: 'id',
   properties: {
     id: 'int',
-    type: 'int',
-    name: 'string',
+    type: { type: 'int', indexed: true },
+    food: 'string',
     price: 'int',
-    date: 'date',
+    date: { type: 'date', indexed: true },
     comment: 'string',
-    genre: 'string',
-    place: 'string'
+    genre: 'Genre',
+    place: 'string',
+    // picture: 'data'
   }
 };
