@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Actions } from 'react-native-router-flux';
 import db from '../../models';
 import { foodTextChanged, postCreated } from '../../actions/PostFormActions';
 import {
@@ -25,6 +26,7 @@ class PostForm extends Component {
   onButtonDown() {
     this.createPost(this.props.postFormData);
     this.props.postCreated();
+    Actions.Home();
   }
 
   createPost(formData) {
@@ -76,7 +78,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     foodTextChanged: bindActionCreators(foodTextChanged, dispatch),
-    postCreated: bindActionCreators(postCreated, dispatch)
+    postCreated: bindActionCreators(postCreated, dispatch),
+
   };
 };
 
