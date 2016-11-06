@@ -9,7 +9,6 @@ import Post from './components/Post';
 import Calendar from './components/Calendar';
 import { TabIcon } from './components/common';
 
-
 let store;
 
 if (__DEV__) {

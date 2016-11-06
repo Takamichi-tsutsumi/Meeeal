@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Text, DatePickerIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
-import db from '../../models';
-import { foodTextChanged, postCreated } from '../../actions/PostFormActions';
+import moment from 'moment';
+import * as PostActions from '../../actions/PostFormActions';
 import {
   Input,
   Button,
@@ -15,12 +16,7 @@ class PostForm extends Component {
   constructor(props) {
     super(props);
 
-    this.onFoodChange = this.onFoodChange.bind(this);
     this.onButtonDown = this.onButtonDown.bind(this);
-  }
-  
-  onFoodChange(text) {
-    this.props.foodTextChanged(text);
   }
 
   onButtonDown() {
@@ -31,31 +27,38 @@ class PostForm extends Component {
 
   createPost(formData) {
     console.log('Saving object', formData);
-    const data = Object.assign(formData);
-
-    db.write(() => {
-      const m = db.objects('Meal').sorted('id', true).slice(0, 1);
-      let id;
-      if (m.length === 0) {
-        id = 1;
-      } else {
-        id = m[0].id + 1;
-      }
-
-      data.id = id;
-
-      db.create('Meal', data);
-    });
   }
 
   render() {
+    const data = this.props.postFormData.data;
+    const date = moment(data.get('date'));
     return (
       <Card>
         <CardSection>
+          <Text>{data.get('type') === 0 ? 'Eat Out' : 'Home Made'}</Text>
+        </CardSection>
+        <CardSection>
+          <Text>{date.format('MM/DD')}</Text>
+        </CardSection>
+        <CardSection>
           <Input
-            label="料理名"
-            placeholder="チャーハン"
-            onChangeText={this.onFoodChange}
+            label="レストラン"
+            onChangeText={this.props.restaurantTextChanged}
+            value={data.get('restaurant')}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="料理"
+            onChangeText={this.props.foodTextChanged}
+            value={data.get('food')}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="ジャンル"
+            onChangeText={this.props.genreTextChanged}
+            value={data.get('genre').name}
           />
         </CardSection>
 
@@ -76,10 +79,17 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
+  const { foodTextChanged, postCreated,
+    typeSwitched, restaurantTextChanged,
+    dateChanged, genreTextChanged } = PostActions;
+
   return {
     foodTextChanged: bindActionCreators(foodTextChanged, dispatch),
-    postCreated: bindActionCreators(postCreated, dispatch),
-
+    typeSwitched: bindActionCreators(typeSwitched, dispatch),
+    restaurantTextChanged: bindActionCreators(restaurantTextChanged, dispatch),
+    dateChanged: bindActionCreators(dateChanged, dispatch),
+    genreTextChanged: bindActionCreators(genreTextChanged, dispatch),
+    postCreated: bindActionCreators(postCreated, dispatch)
   };
 };
 
