@@ -6,3 +6,4 @@ export * from './Input';
 export * from './Spinner';
 export * from './TabIcon';
 export * from './DatePicker';
+export * from './ToggleText';

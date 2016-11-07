@@ -1,12 +1,10 @@
 import { handleActions } from 'redux-actions';
 import { Map } from 'immutable';
 import * as Actions from '../actions/PostFormActions';
-import { EatOut } from '../models/Meal';
 
-const swapType = (x) => { return (x - 1) ^ 2; };
 const INITIAL_STATE = {
   data: Map({
-    type: EatOut,
+    type: 0,
     date: new Date(),
     restaurant: '',
     food: '',
@@ -16,7 +14,7 @@ const INITIAL_STATE = {
 
 export const PostFormReducer = handleActions({
   [Actions.typeSwitched]: (state) => ({
-    data: state.data.set('type', swapType(state.data.type))
+    data: state.data.set('type', Number(!state.data.get('type')))
   }),
 
   [Actions.dateChanged]: (state, action) => ({

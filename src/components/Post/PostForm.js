@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
-import { Text } from 'react-native';
 import * as PostActions from '../../actions/PostFormActions';
 import {
   Input,
   Button,
   Card,
   CardSection,
-  DatePicker
+  DatePicker,
+  ToggleText
 } from '../common';
 
 class PostForm extends Component {
@@ -35,7 +35,10 @@ class PostForm extends Component {
     return (
       <Card>
         <CardSection>
-          <Text>{data.get('type') === 0 ? 'Eat Out' : 'Home Made'}</Text>
+          <ToggleText
+            textList={['Eat Out', 'Home Made']}
+            onPress={this.props.typeSwitched}
+          />
         </CardSection>
         <CardSection>
           <DatePicker
