@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Text, DatePickerIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
-import moment from 'moment';
+import { Text } from 'react-native';
 import * as PostActions from '../../actions/PostFormActions';
 import {
   Input,
   Button,
   Card,
-  CardSection
+  CardSection,
+  DatePicker
 } from '../common';
 
 class PostForm extends Component {
@@ -31,14 +31,17 @@ class PostForm extends Component {
 
   render() {
     const data = this.props.postFormData.data;
-    const date = moment(data.get('date'));
+    const date = data.get('date');
     return (
       <Card>
         <CardSection>
           <Text>{data.get('type') === 0 ? 'Eat Out' : 'Home Made'}</Text>
         </CardSection>
         <CardSection>
-          <Text>{date.format('MM/DD')}</Text>
+          <DatePicker
+            date={date}
+            onDateChange={this.props.dateChanged}
+          />
         </CardSection>
         <CardSection>
           <Input
