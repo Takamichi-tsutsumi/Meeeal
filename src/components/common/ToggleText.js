@@ -11,23 +11,16 @@ class ToggleText extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      value: this.props.initialValue
-    };
-
     this.onToggle = this.onToggle.bind(this);
   }
 
   onToggle() {
-    this.setState({
-      value: Number(!this.state.value)
-    });
     this.props.onPress();
   }
 
   render() {
     const textStyle = (num) => {
-      return num === this.state.value ?
+      return num === this.props.value ?
         this.props.selectedTextStyle :
         this.props.otherTextStyle;
     };
@@ -69,8 +62,7 @@ ToggleText.defaultProps = {
   },
   otherTextStyle: {
     color: 'gray'
-  },
-  initialValue: 0
+  }
 };
 
 ToggleText.propTypes = {
@@ -79,7 +71,7 @@ ToggleText.propTypes = {
   otherTextStyle: PropTypes.object,
   textList: PropTypes.array.isRequired,
   onPress: PropTypes.func.isRequired,
-  initialValue: PropTypes.oneOf([0, 1])
+  value: PropTypes.oneOf([0, 1]).isRequired
 };
 
 export { ToggleText };

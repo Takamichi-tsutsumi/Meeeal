@@ -38,6 +38,7 @@ class PostForm extends Component {
           <ToggleText
             textList={['Eat Out', 'Home Made']}
             onPress={this.props.typeSwitched}
+            value={data.get('type')}
           />
         </CardSection>
         <CardSection>
