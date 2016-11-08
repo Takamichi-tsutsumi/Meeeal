@@ -1,16 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import {
   View,
-  Text,
   ListView,
   CameraRoll,
-  TouchableHighlight,
-  Image,
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import Immutable from 'immutable';
 import groupByEveryN from 'react-native/Libraries/Utilities/groupByEveryN';
+import ImageItem from './ImageItem';
 
 class ImagePicker extends Component {
   constructor(props) {
@@ -99,17 +96,16 @@ class ImagePicker extends Component {
   }
 
   _renderImage(asset) {
-    console.log(asset.node);
-    const imageStyle = {
-      width: 150,
-      height: 150
-    };
+    const { image } = asset.node;
 
     return (
-      <Image
-        key={asset.node.uri}
-        style={[imageStyle, styles.image]}
-        source={asset.node.image}
+      <ImageItem
+        key={image.uri}
+        item={asset}
+        imagesPerRow={this.props.imagesPerRow}
+        source={image}
+        // TODO: Dispatch action here
+        onClick={console.log}
       />
     );
   }
