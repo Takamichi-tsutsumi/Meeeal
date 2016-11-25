@@ -6,8 +6,12 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import groupByEveryN from 'react-native/Libraries/Utilities/groupByEveryN';
 import ImageItem from './ImageItem';
+import { imageSelected } from '../../actions/PostFormActions';
 
 class ImagePicker extends Component {
   constructor(props) {
@@ -44,7 +48,7 @@ class ImagePicker extends Component {
 
   _fetch() {
     const fetchParams = {
-      first: 3,
+      first: 30,
       assetType: 'Photos'
     };
 
@@ -81,6 +85,11 @@ class ImagePicker extends Component {
     console.error(e);
   }
 
+  selectImage(image) {
+    this.props.imageSelected(image);
+    Actions.postForm({ image });
+  }
+
   _renderFooterSpinner() {
     if (!this.state.noMore) {
       return <ActivityIndicator />;
@@ -104,13 +113,12 @@ class ImagePicker extends Component {
         item={asset}
         imagesPerRow={this.props.imagesPerRow}
         source={image}
-        // TODO: Dispatch action here
-        onClick={console.log}
+        onClick={() => { this.selectImage(image); }}
       />
     );
   }
 
-  renderRow(rowData, sectionID, rowID) {
+  renderRow(rowData) {
     const images = rowData.map((asset) => {
       if (asset === null) {
         return null;
@@ -169,4 +177,13 @@ ImagePicker.defaultProps = {
   imagesPerRow: 3,
 };
 
-export default ImagePicker;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    imageSelected: bindActionCreators(imageSelected, dispatch)
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ImagePicker);

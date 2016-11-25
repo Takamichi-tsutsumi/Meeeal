@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
@@ -11,6 +12,7 @@ import {
   DatePicker,
   ToggleText
 } from '../common';
+
 
 class PostForm extends Component {
   constructor(props) {
@@ -32,8 +34,15 @@ class PostForm extends Component {
   render() {
     const data = this.props.postFormData.data;
     const date = data.get('date');
+    const { image } = this.props;
     return (
       <Card>
+        <CardSection style={{ flex: 1 }}>
+          <Image
+            style={{height: 100, width: 100}}
+            source={image}
+          />
+        </CardSection>
         <CardSection>
           <ToggleText
             textList={['Eat Out', 'Home Made']}

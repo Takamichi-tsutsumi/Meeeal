@@ -6,3 +6,5 @@ export const foodTextChanged = createAction('FoodTextChanged', data => data);
 export const restaurantTextChanged = createAction('RestaurantTextChanged', data => data);
 export const genreTextChanged = createAction('GenreTextChanged', data => data);
 export const postCreated = createAction('PostCreated');
+export const imageSelected = createAction('ImageSelected', data => data);
+export const imageDeSelected = createAction('ImageDeSelected');

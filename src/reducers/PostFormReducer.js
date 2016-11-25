@@ -3,12 +3,14 @@ import { Map } from 'immutable';
 import * as Actions from '../actions/PostFormActions';
 
 const INITIAL_STATE = {
+  imageSelected: false,
   data: Map({
     type: 0,
     date: new Date(),
     restaurant: '',
     food: '',
-    genre: { name: '和食' }
+    genre: { name: '和食' },
+    image: ''
   })
 };
 
@@ -31,6 +33,16 @@ export const PostFormReducer = handleActions({
 
   [Actions.genreTextChanged]: (state, action) => ({
     data: state.data.set('genre', { name: action.payload })
+  }),
+
+  [Actions.imageSelected]: (state, action) => ({
+    data: state.data.set('image', action.payload),
+    imageSelected: true
+  }),
+
+  [Actions.imageDeSelected]: (state, action) => ({
+    data: state.data.set('image', action.payload),
+    imageSelected: false
   }),
 
   [Actions.postCreated]: () => ({
