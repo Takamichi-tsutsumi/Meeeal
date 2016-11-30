@@ -13,6 +13,8 @@ class Home extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(this.props.postList.items.toArray())
     };
+
+    this.renderFeed = this.renderFeed.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -22,15 +24,23 @@ class Home extends Component {
     });
   }
 
-  render() {
+  renderFeed() {
+    const size = this.props.postList.items.size;
     return (
-      <View style={styles.container}>
-        <Text>Home currently posted: {this.props.postList.items.size}</Text>
+      size === 0 ?
+        <Text> There are No post </Text> :
         <Feed
           dataSource={this.state.dataSource}
           enableEmptySections={true}
         />
-      </View>
+    );
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        { this.renderFeed() }
+     </View>
     );
   }
 }
@@ -40,7 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.home_background,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 50
   }
 });
 
