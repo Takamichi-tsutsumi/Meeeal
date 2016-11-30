@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
@@ -39,54 +39,56 @@ class PostForm extends Component {
     const date = data.get('date');
     const { image } = this.props;
     return (
-      <Card>
-        <CardSection style={{ flex: 1 }}>
-          <Image
-            style={{ height: 100, width: 100 }}
-            source={image}
-          />
-        </CardSection>
-        <CardSection>
-          <ToggleText
-            textList={['Eat Out', 'Home Made']}
-            onPress={this.props.typeSwitched}
-            value={data.get('type')}
-          />
-        </CardSection>
-        <CardSection>
-          <DatePicker
-            date={date}
-            onDateChange={this.props.dateChanged}
-          />
-        </CardSection>
-        <CardSection>
-          <Input
-            label="レストラン"
-            onChangeText={this.props.restaurantTextChanged}
-            value={data.get('restaurant')}
-          />
-        </CardSection>
-        <CardSection>
-          <Input
-            label="料理"
-            onChangeText={this.props.foodTextChanged}
-            value={data.get('food')}
-          />
-        </CardSection>
-        <CardSection>
-          <Input
-            label="ジャンル"
-            onChangeText={this.props.genreTextChanged}
-            value={data.get('genre').name}
-          />
-        </CardSection>
+      <View>
+        <Card>
+          <CardSection style={{ flex: 1 }}>
+            <Image
+              style={{ height: 100, width: 100 }}
+              source={image}
+            />
+          </CardSection>
+          <CardSection>
+            <ToggleText
+              textList={['Eat Out', 'Home Made']}
+              onPress={this.props.typeSwitched}
+              value={data.get('type')}
+            />
+          </CardSection>
+          <CardSection>
+            <DatePicker
+              date={date}
+              onDateChange={this.props.dateChanged}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+              label="レストラン"
+              onChangeText={this.props.restaurantTextChanged}
+              value={data.get('restaurant')}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+              label="料理"
+              onChangeText={this.props.foodTextChanged}
+              value={data.get('food')}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+              label="ジャンル"
+              onChangeText={this.props.genreTextChanged}
+              value={data.get('genre').name}
+            />
+          </CardSection>
 
-        <CardSection>
-          <Button onPress={this.onButtonDown}>
-            Post
-          </Button>
-        </CardSection>
-      </Card>
+          <CardSection>
+            <Button onPress={this.onButtonDown}>
+              Post
+            </Button>
+          </CardSection>
+        </Card>
+      </View>
     );
   }
 }

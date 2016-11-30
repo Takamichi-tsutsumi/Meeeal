@@ -38,15 +38,15 @@ class App extends Component {
                 sceneStyle={{ marginTop: 64 }} icon={TabIcon}
               />
             </Scene>
-            <Scene key="Post" direction="vertical" hideNavBar={true}>
+            <Scene key="Post" direction="vertical">
               <Scene
                 key="imagePicker" component={ImagePicker}
-                schema="modal"
-                sceneStyle={{ marginTop: 20 }}
+                schema="modal" sceneStyle={{ marginTop: 68 }}
+                onLeft={Actions.pop} leftTitle={'\u2718'} // TODO left icon
               />
               <Scene
                 key="postForm" component={PostForm}
-                sceneStyle={{ marginTop: 20 }}
+                sceneStyle={{ marginTop: 64 }}
               />
             </Scene>
           </Scene>
