@@ -45,7 +45,7 @@ export const PostFormReducer = handleActions({
     imageSelected: false
   }),
 
-  [Actions.postCreated]: () => ({
+  [Actions.resetForm]: () => ({
     ...INITIAL_STATE
   })
 }, INITIAL_STATE);

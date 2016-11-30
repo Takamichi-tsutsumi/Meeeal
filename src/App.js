@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
-import { createStore } from 'redux';
+import { StyleSheet } from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
-import devToolsEnhancer from 'remote-redux-devtools';
-import reducers from './reducers';
+import configureStore from './store';
 import Home from './components/Home';
 import ImagePicker from './components/Post/ImagePicker';
 import PostForm from './components/Post/PostForm';
 import Calendar from './components/Calendar';
 import { TabIcon } from './components/common';
+import { colors } from './Constants';
 
-let store;
 
-if (__DEV__) {
-  store = createStore(reducers, devToolsEnhancer());
-} else {
-  store = createStore(reducers);
-}
+const store = configureStore();
 const RouterWithRedux = connect()(Router);
 
 class App extends Component {
@@ -27,28 +22,31 @@ class App extends Component {
           <Scene key="root">
             <Scene
               key="tabbar" tabs={true}
-              tabBarStyle={{ backgroundColor: 'lightgray' }}
+              tabBarStyle={{ backgroundColor: colors.tabbar }}
             >
               <Scene
-                key="Home" component={Home} title="Home"
+                key="Home" component={Home} title="meeeal"
+                menuText="Home"
                 sceneStyle={{ marginTop: 64 }} icon={TabIcon}
+                initial={true}
+                onLeft={() => { Actions.Post(); }} leftTitle="+post"
+                navigationBarStyle={styles.homeNavbar}
               />
               <Scene
-                key="Post" title="Post"
-                icon={TabIcon}
-              >
-                <Scene
-                  key="imagePicker" component={ImagePicker}
-                  sceneStyle={{ marginTop: 64 }}
-                />
-                <Scene
-                  key="postForm" component={PostForm}
-                  sceneStyle={{ marginTop: 64 }}
-                />
-              </Scene>
-              <Scene
                 key="Calendar" component={Calendar} title="Calendar"
+                menuText="Calendar"
                 sceneStyle={{ marginTop: 64 }} icon={TabIcon}
+              />
+            </Scene>
+            <Scene key="Post" direction="vertical" hideNavBar={true}>
+              <Scene
+                key="imagePicker" component={ImagePicker}
+                schema="modal"
+                sceneStyle={{ marginTop: 20 }}
+              />
+              <Scene
+                key="postForm" component={PostForm}
+                sceneStyle={{ marginTop: 20 }}
               />
             </Scene>
           </Scene>
@@ -57,5 +55,12 @@ class App extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  homeNavbar: {
+    backgroundColor: colors.home_background,
+    borderBottomWidth: 0
+  }
+});
 
 export default App;

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 import * as PostActions from '../../actions/PostFormActions';
+import { addPost } from '../../actions/PostListActions';
 import {
   Input,
   Button,
@@ -19,16 +20,25 @@ class PostForm extends Component {
     super(props);
 
     this.onButtonDown = this.onButtonDown.bind(this);
+    this.createPost = this.createPost.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.resetForm();
+  }
+
+  componentWillUnmount() {
+    this.props.resetForm();
   }
 
   onButtonDown() {
-    this.createPost(this.props.postFormData);
-    this.props.postCreated();
-    Actions.Home();
+    this.createPost(this.props.postFormData.data);
+    this.props.resetForm();
+    Actions.popTo('root');
   }
 
   createPost(formData) {
-    console.log('Saving object', formData);
+    this.props.addPost(formData);
   }
 
   render() {
@@ -39,7 +49,7 @@ class PostForm extends Component {
       <Card>
         <CardSection style={{ flex: 1 }}>
           <Image
-            style={{height: 100, width: 100}}
+            style={{ height: 100, width: 100 }}
             source={image}
           />
         </CardSection>
@@ -90,12 +100,13 @@ class PostForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    postFormData: state.postFormData
+    postFormData: state.postFormData,
+    postList: state.postList
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  const { foodTextChanged, postCreated,
+  const { foodTextChanged, resetForm,
     typeSwitched, restaurantTextChanged,
     dateChanged, genreTextChanged } = PostActions;
 
@@ -105,7 +116,8 @@ const mapDispatchToProps = (dispatch) => {
     restaurantTextChanged: bindActionCreators(restaurantTextChanged, dispatch),
     dateChanged: bindActionCreators(dateChanged, dispatch),
     genreTextChanged: bindActionCreators(genreTextChanged, dispatch),
-    postCreated: bindActionCreators(postCreated, dispatch)
+    resetForm: bindActionCreators(resetForm, dispatch),
+    addPost: bindActionCreators(addPost, dispatch)
   };
 };
 
