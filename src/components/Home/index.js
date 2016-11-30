@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import moment from 'moment';
+import Feed from './Feed';
 import { dataLoaded } from '../../actions/PostListActions';
 import { colors } from '../../Constants';
 
@@ -14,36 +14,33 @@ class Home extends Component {
       dataSource: ds.cloneWithRows(this.props.postList.items.toArray())
     };
 
-    console.log(this.props.postList.items);
+    this.renderFeed = this.renderFeed.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps);
     const items = newProps.postList.items.toArray();
-    console.log(items);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(items)
     });
   }
 
-  renderRow(item) {
+  renderFeed() {
+    const size = this.props.postList.items.size;
     return (
-      <Text>
-        {item.get('restaurant')} {item.get('food')} {moment(item.get('date')).format('YY/MM/DD')}
-      </Text>
+      size === 0 ?
+        <Text> There are No post </Text> :
+        <Feed
+          dataSource={this.state.dataSource}
+          enableEmptySections={true}
+        />
     );
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Home currently posted: {this.props.postList.items.size}</Text>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
-          enableEmptySections={true}
-        />
-      </View>
+        { this.renderFeed() }
+     </View>
     );
   }
 }
@@ -53,7 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.home_background,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 50
   }
 });
 

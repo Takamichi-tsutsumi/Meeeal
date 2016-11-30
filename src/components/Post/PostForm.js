@@ -23,14 +23,6 @@ class PostForm extends Component {
     this.createPost = this.createPost.bind(this);
   }
 
-  componentWillMount() {
-    this.props.resetForm();
-  }
-
-  componentWillUnmount() {
-    this.props.resetForm();
-  }
-
   onButtonDown() {
     this.createPost(this.props.postFormData.data);
     this.props.resetForm();
@@ -38,6 +30,7 @@ class PostForm extends Component {
   }
 
   createPost(formData) {
+    console.log(formData);
     this.props.addPost(formData);
   }
 
