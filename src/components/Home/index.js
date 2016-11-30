@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import moment from 'moment';
+import Feed from './Feed';
 import { dataLoaded } from '../../actions/PostListActions';
 import { colors } from '../../Constants';
 
@@ -13,34 +13,21 @@ class Home extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(this.props.postList.items.toArray())
     };
-
-    console.log(this.props.postList.items);
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps);
     const items = newProps.postList.items.toArray();
-    console.log(items);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(items)
     });
-  }
-
-  renderRow(item) {
-    return (
-      <Text>
-        {item.get('restaurant')} {item.get('food')} {moment(item.get('date')).format('YY/MM/DD')}
-      </Text>
-    );
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text>Home currently posted: {this.props.postList.items.size}</Text>
-        <ListView
+        <Feed
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
           enableEmptySections={true}
         />
       </View>
