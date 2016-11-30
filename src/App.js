@@ -29,8 +29,9 @@ class App extends Component {
                 menuText="Home"
                 sceneStyle={{ marginTop: 64 }} icon={TabIcon}
                 initial={true}
-                onLeft={() => { Actions.Post(); }} leftTitle="+post"
+                onLeft={() => { Actions.Post(); }} leftTitle="+"
                 navigationBarStyle={styles.homeNavbar}
+                leftButtonTextStyle={styles.navBarButtonStyle}
               />
               <Scene
                 key="Calendar" component={Calendar} title="Calendar"
@@ -42,11 +43,16 @@ class App extends Component {
               <Scene
                 key="imagePicker" component={ImagePicker}
                 schema="modal" sceneStyle={{ marginTop: 68 }}
-                onLeft={Actions.pop} leftTitle={'\u2718'} // TODO left icon
+                onLeft={Actions.pop} leftTitle={'\u2715'} // TODO left icon
+                barButtonTextStyle={{ color: 'black' }}
+                leftButtonTextStyle={styles.navBarButtonStyle}
               />
               <Scene
                 key="postForm" component={PostForm}
                 sceneStyle={{ marginTop: 64 }}
+                hideBackImage={true}
+                backTitle={'\u2190'}
+                backButtonTextStyle={styles.navBarButtonStyle}
               />
             </Scene>
           </Scene>
@@ -65,6 +71,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.tabBarLight,
     borderTopWidth: 1,
     borderColor: colors.tabBarBorder
+  },
+  navBarButtonStyle: {
+    color: colors.allBlack,
+    fontSize: 20
   }
 });
 

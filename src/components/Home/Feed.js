@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   postItem: {
     height: height * 0.65,
     width: width * 0.9,
-    backgroundColor: colors.allwhite,
+    backgroundColor: colors.allWhite,
     borderWidth: 1,
     borderColor: colors.lightGray
   },

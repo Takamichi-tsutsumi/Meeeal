@@ -1,15 +1,15 @@
 export const colors = {
   homeBackground: '#ECE8DF',
-  other_background: '#FBFAF8',
-  tabbar: '#382E15',
-  tabBarActive: '#4B422D',
-  main_orange: '#F7A70E',
-  main_green: '#A7D97E',
-  subcolor: '#F67F9B',
-  allblack: '#382E15',
-  allwhite: '#FBFAF8',
+  otherBackground: '#FBFAF8',
+  mainOrange: '#F7A70E',
+  mainGreen: '#A7D97E',
+  subPink: '#F67F9B',
+  allBlack: '#382E15',
+  allWhite: '#FBFAF8',
   lightGray: '#d3d3d3',
+  tabBarDark: '#382E15',
   tabBarLight: '#D9D5CC',
+  tabBarActive: '#4B422D',
   tabBarBorder: '#B2AEA7'
 };
 

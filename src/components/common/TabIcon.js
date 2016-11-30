@@ -4,7 +4,7 @@ import { colors } from '../../Constants';
 
 export const TabIcon = (props) => {
   return (
-    <Text style={{ color: (props.selected ? colors.tabBarActive : colors.allwhite), fontSize: 16}}>
+    <Text style={{ color: (props.selected ? colors.tabBarActive : colors.allWhite), fontSize: 16}}>
       {props.menuText}
     </Text>
   );
