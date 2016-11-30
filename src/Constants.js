@@ -1,14 +1,16 @@
 export const colors = {
-  home_background: '#ECE8DF',
+  homeBackground: '#ECE8DF',
   other_background: '#FBFAF8',
   tabbar: '#382E15',
-  tabbar_active: '#4B422D',
+  tabBarActive: '#4B422D',
   main_orange: '#F7A70E',
   main_green: '#A7D97E',
   subcolor: '#F67F9B',
   allblack: '#382E15',
   allwhite: '#FBFAF8',
-  lightGray: '#d3d3d3'
+  lightGray: '#d3d3d3',
+  tabBarLight: '#D9D5CC',
+  tabBarBorder: '#B2AEA7'
 };
 
 export const timeFormatStrings = {

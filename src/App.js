@@ -22,7 +22,7 @@ class App extends Component {
           <Scene key="root">
             <Scene
               key="tabbar" tabs={true}
-              tabBarStyle={{ backgroundColor: colors.tabbar }}
+              tabBarStyle={styles.tabBarStyle}
             >
               <Scene
                 key="Home" component={Home} title="meeeal"
@@ -34,7 +34,7 @@ class App extends Component {
               />
               <Scene
                 key="Calendar" component={Calendar} title="Calendar"
-                menuText="Calendar"
+                menuText="Calendar" tabBarStyle={{backgroundColor: 'gray'}}
                 sceneStyle={{ marginTop: 64 }} icon={TabIcon}
               />
             </Scene>
@@ -58,8 +58,13 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   homeNavbar: {
-    backgroundColor: colors.home_background,
+    backgroundColor: colors.homeBackground,
     borderBottomWidth: 0
+  },
+  tabBarStyle: {
+    backgroundColor: colors.tabBarLight,
+    borderTopWidth: 1,
+    borderColor: colors.tabBarBorder
   }
 });
 
